@@ -10,6 +10,15 @@ def test_route():
     print("Received test request.")
     return jsonify({"message": "Test route is working You Can chill!"})
 
+@app.route('/submit', methods=['POST'])
+def submit():
+    data = request.json
+    response = {
+        "message": "Data received",
+        "data": data
+    }
+    return jsonify(response)
+
 @app.route('/upload', methods=['POST'])
 def upload_file():
     print("Received file upload request.")
