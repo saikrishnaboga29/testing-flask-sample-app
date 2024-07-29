@@ -19,34 +19,31 @@ def submit():
     }
     return jsonify(response)
 
-@app.route('/submit', methods=['POST'])
-def submit():
+@app.route('/upload', methods=['POST'])
+def upload_file():
+    print("Received file upload request.")
     data = request.json
     response = {
         "message": "Data received",
         "data": data
     }
-    return jsonify(response)
+    # if 'file' not in request.files:
+    #     print("No file part in request.")
+    #     return jsonify({"error": "No file part"}), 400
 
-@app.route('/upload', methods=['POST'])
-def upload_file():
-    print("Received file upload request.")
-    if 'file' not in request.files:
-        print("No file part in request.")
-        return jsonify({"error": "No file part"}), 400
-
-    file = request.files['file']
-    if file.filename == '':
-        print("No file selected for uploading.")
-        return jsonify({"error": "No selected file"}), 400
+    # file = request.files['file']
+    # if file.filename == '':
+    #     print("No file selected for uploading.")
+    #     return jsonify({"error": "No selected file"}), 400
 
     # Read the file in memory
     # file_data = io.BytesIO(file.read())
     # print(f"File {file.filename} read into memory.")
     # transcription = transcribe_audio(file_data)
-    
+
     # return jsonify({"transcription": transcription})
-    return jsonify({"transcription": "Working"})
+    print("End of the upload method")
+    return jsonify(response)
 
 def transcribe_audio(file_data):
     print("Starting transcription process.")
