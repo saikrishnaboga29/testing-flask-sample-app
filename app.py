@@ -19,6 +19,15 @@ def submit():
     }
     return jsonify(response)
 
+@app.route('/submit', methods=['POST'])
+def submit():
+    data = request.json
+    response = {
+        "message": "Data received",
+        "data": data
+    }
+    return jsonify(response)
+
 @app.route('/upload', methods=['POST'])
 def upload_file():
     print("Received file upload request.")
@@ -32,11 +41,12 @@ def upload_file():
         return jsonify({"error": "No selected file"}), 400
 
     # Read the file in memory
-    file_data = io.BytesIO(file.read())
-    print(f"File {file.filename} read into memory.")
-    transcription = transcribe_audio(file_data)
-
-    return jsonify({"transcription": transcription})
+    # file_data = io.BytesIO(file.read())
+    # print(f"File {file.filename} read into memory.")
+    # transcription = transcribe_audio(file_data)
+    
+    # return jsonify({"transcription": transcription})
+    return jsonify({"transcription": "Working"})
 
 def transcribe_audio(file_data):
     print("Starting transcription process.")
